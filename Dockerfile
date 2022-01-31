@@ -28,6 +28,8 @@ RUN wget -nc https://dl.winehq.org/wine-builds/winehq.key && \
     add-apt-repository ppa:cybermax-dexter/sdl2-backport && \
     apt-get -y install winehq-stable --fix-missing
 
+RUN apt-get -y install dos2unix
+
 # Add a web UI for debug purposes
 RUN apt-get update && apt-get -y install x11vnc
 WORKDIR /root/
@@ -47,6 +49,8 @@ COPY config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY scripts /app
 COPY --from=launcher-builder /root/launcher /app
 COPY config/emule /app/config
+
+RUN dos2unix /app/init.sh
 
 EXPOSE 4711/tcp 23732/tcp 23733/udp
 VOLUME /app/config /data
