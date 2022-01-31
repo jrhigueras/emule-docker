@@ -35,8 +35,8 @@ RUN wget -O - https://github.com/novnc/websockify/archive/v0.9.0.tar.gz | tar -x
 
 WORKDIR /app
 
-RUN curl https://www.emule-project.net/files/emule/eMule0.51d.zip --output /tmp/emule.zip && \
-    unzip /tmp/emule.zip -d /tmp && mv /tmp/eMule0.51d/* /app
+RUN curl https://github.com/irwir/eMule/releases/download/eMule_v0.60d-community/eMule0.60d_x64.zip --output /tmp/emule.zip && \
+    unzip /tmp/emule.zip -d /tmp && mv /tmp/eMule0.60d_x64.zip/* /app
 
 ENV WINEPREFIX /app/.wine
 ENV WINEARCH win32
