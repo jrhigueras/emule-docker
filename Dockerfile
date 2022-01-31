@@ -5,7 +5,7 @@ COPY launcher /root
 RUN go build -o launcher
 
 FROM ubuntu:bionic
-MAINTAINER Aitor González
+LABEL maintainer="Dario Ragusa"
 
 ENV UID 0
 ENV GUI 0
@@ -18,14 +18,15 @@ WORKDIR /root
 
 RUN dpkg --add-architecture i386
 RUN apt-get update && \
-    apt-get -y install nano unzip wget tar curl gnupg software-properties-common xvfb xdotool supervisor net-tools fluxbox
+    apt-get -y install libnghttp2-14 && \
+    apt-get -y install nano unzip wget tar curl gnupg software-properties-common xvfb xdotool supervisor net-tools fluxbox --fix-missing
 
 ENV WINEDLLOVERRIDES=mscoree=d;mshtml=d
 RUN wget -nc https://dl.winehq.org/wine-builds/winehq.key && \
     apt-key add winehq.key && \
     apt-add-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ bionic main' && \
     add-apt-repository ppa:cybermax-dexter/sdl2-backport && \
-    apt-get -y install winehq-stable
+    apt-get -y install winehq-stable --fix-missing
 
 # Add a web UI for debug purposes
 RUN apt-get update && apt-get -y install x11vnc
@@ -35,8 +36,8 @@ RUN wget -O - https://github.com/novnc/websockify/archive/v0.9.0.tar.gz | tar -x
 
 WORKDIR /app
 
-RUN curl https://github.com/irwir/eMule/releases/download/eMule_v0.60d-community/eMule0.60d_x64.zip --output /tmp/emule.zip && \
-    unzip /tmp/emule.zip -d /tmp && mv /tmp/eMule0.60d_x64.zip/* /app
+RUN curl https://www.emule-project.net/files/emule/eMule0.60d.zip --output /tmp/emule.zip && \
+    unzip /tmp/emule.zip -d /tmp && mv /tmp/eMule0.60d/* /app
 
 ENV WINEPREFIX /app/.wine
 ENV WINEARCH win32
