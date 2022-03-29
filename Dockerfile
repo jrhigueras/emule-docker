@@ -30,7 +30,7 @@ RUN wget -nc https://dl.winehq.org/wine-builds/winehq.key && \
 
 RUN apt-get -y install dos2unix
 
-# Add a web UI for debug purposes
+# Add a web UI for use purposes
 RUN apt-get update && apt-get -y install x11vnc
 WORKDIR /root/
 RUN wget -O - https://github.com/novnc/noVNC/archive/v1.1.0.tar.gz | tar -xzv -C /root/ && mv /root/noVNC-1.1.0 /root/novnc && ln -s /root/novnc/vnc_lite.html /root/novnc/index.html
@@ -48,7 +48,7 @@ ENV DISPLAY :0
 COPY config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY scripts /app
 COPY --from=launcher-builder /root/launcher /app
-COPY config/emule /app/config
+# COPY config/emule /app/config
 
 RUN dos2unix /app/init.sh
 

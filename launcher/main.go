@@ -30,12 +30,12 @@ func main() {
 
 	preferences := []PreferenceOption{
 		{env: "EMULE_NICK", iniSection: "eMule", iniKey: "Nick", defaultVal: "https://emule-project.net"},
-		{env: "EMULE_MAX_UPLOAD", iniSection: "eMule", iniKey: "MaxUpload", defaultVal: "500000"},
+		{env: "EMULE_MAX_UPLOAD", iniSection: "eMule", iniKey: "MaxUpload", defaultVal: "1024"},
 		{env: "EMULE_TCP_PORT", iniSection: "eMule", iniKey: "Port", defaultVal: "23732"},
 		{env: "EMULE_UDP_PORT", iniSection: "eMule", iniKey: "UDPPort", defaultVal: "23733"},
 		{env: "EMULE_LANGUAGE", iniSection: "eMule", iniKey: "Language", defaultVal: "1033"},
-		{env: "EMULE_CAP_UPLOAD", iniSection: "eMule", iniKey: "DownloadCapacity", defaultVal: "1000000000"},
-		{env: "EMULE_CAP_DOWNLOAD", iniSection: "eMule", iniKey: "UploadCapacityNew", defaultVal: "1000000000"},
+		{env: "EMULE_CAP_UPLOAD", iniSection: "eMule", iniKey: "UploadCapacityNew", defaultVal: "2048"},
+		{env: "EMULE_CAP_DOWNLOAD", iniSection: "eMule", iniKey: "DownloadCapacity", defaultVal: "16384"},
 		{env: "EMULE_RECONNECT", iniSection: "eMule", iniKey: "Reconnect", defaultVal: "1"},
 		{env: "EMULE_UPDATE_FROM_SERVER", iniSection: "eMule", iniKey: "AddServersFromServer", defaultVal: "1"},
 		{env: "EMULE_HOSTNAME", iniSection: "eMule", iniKey: "YourHostname", defaultVal: ""},
