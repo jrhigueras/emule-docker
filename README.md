@@ -1,7 +1,7 @@
 # emule-docker
 Emule over wine, "daemonized" inside a docker
 
-`docker run -p 8080:8080 -p 23732:23732 -p 23733:23733 -v emule_data:/app/config --name emule darioragusa/emule`
+`docker run -p 9010:9010 -p 23732:23732 -p 23733:23733 -v emule_data:/app/config --name emule darioragusa/emule`
 
 ## Environment variables
 
@@ -23,7 +23,7 @@ Emule over wine, "daemonized" inside a docker
 ## Ports
 
 - `4711/tcp`: Web control panel (Optional)
-- `8080/tcp`: Web VNC desktop
+- `9010/tcp`: Web VNC desktop
 - `23732/tcp`: Edonkey network
 - `23733/udp`: Kad network
 
@@ -35,6 +35,6 @@ Emule over wine, "daemonized" inside a docker
 
 <!--
 docker build emule-docker -t darioragusa/emule:latest
-docker run -p 127.0.0.1:8080:8080 darioragusa/emule:latest
+docker run -p 127.0.0.1:9010:9010 darioragusa/emule:latest
 docker push darioragusa/emule:latest
 -->
