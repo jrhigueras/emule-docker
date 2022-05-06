@@ -53,6 +53,5 @@ COPY --from=launcher-builder /root/launcher /app
 RUN dos2unix /app/init.sh
 
 EXPOSE 4711/tcp 23732/tcp 23733/udp
-VOLUME /app/config /data
 
 ENTRYPOINT ["/app/init.sh"]
