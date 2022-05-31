@@ -4,7 +4,7 @@ WORKDIR /root
 COPY launcher /root
 RUN go build -o launcher
 
-FROM ubuntu:bionic
+FROM debian:stable-slim
 LABEL maintainer="Dario Ragusa"
 
 ENV UID 0
@@ -16,39 +16,29 @@ ENV LANGUAGE en_US.UTF-8
 
 WORKDIR /root
 
-RUN dpkg --add-architecture i386
-RUN apt-get update && \
-    apt-get -y install libnghttp2-14 && \
-    apt-get -y install nano unzip wget tar curl gnupg software-properties-common xvfb xdotool supervisor net-tools fluxbox --fix-missing
+RUN apt-get update && apt-get -y install nano unzip wget tar curl gnupg2 dos2unix python procps
+RUN apt-get -y install --no-install-recommends wine64
 
-ENV WINEDLLOVERRIDES=mscoree=d;mshtml=d
-RUN wget -nc https://dl.winehq.org/wine-builds/winehq.key && \
-    apt-key add winehq.key && \
-    apt-add-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ bionic main' && \
-    add-apt-repository ppa:cybermax-dexter/sdl2-backport && \
-    apt-get -y install winehq-stable --fix-missing
-
-RUN apt-get -y install dos2unix
+RUN apt-get -y install xvfb x11vnc xdotool supervisor net-tools fluxbox
 
 # Add a web UI for use purposes
-RUN apt-get update && apt-get -y install x11vnc
 WORKDIR /root/
 RUN wget -O - https://github.com/novnc/noVNC/archive/v1.1.0.tar.gz | tar -xzv -C /root/ && mv /root/noVNC-1.1.0 /root/novnc && ln -s /root/novnc/vnc_lite.html /root/novnc/index.html
 RUN wget -O - https://github.com/novnc/websockify/archive/v0.9.0.tar.gz | tar -xzv -C /root/ && mv /root/websockify-0.9.0 /root/novnc/utils/websockify
 
 WORKDIR /app
 
-RUN curl https://www.emule-project.net/files/emule/eMule0.60d.zip --output /tmp/emule.zip && \
+# https://github.com/irwir/eMule
+RUN wget https://github.com/irwir/eMule/releases/download/eMule_v0.60d-community/eMule0.60d_x64.zip -O /tmp/emule.zip && \
     unzip /tmp/emule.zip -d /tmp && mv /tmp/eMule0.60d/* /app
 
-ENV WINEPREFIX /app/.wine
-ENV WINEARCH win32
+ENV WINEPREFIX /app/.wine64
+ENV WINEARCH win64
 ENV DISPLAY :0
     
 COPY config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY scripts /app
 COPY --from=launcher-builder /root/launcher /app
-# COPY config/emule /app/config
 
 RUN dos2unix /app/init.sh
 

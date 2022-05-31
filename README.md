@@ -35,6 +35,7 @@ Emule over wine, "daemonized" inside a docker
 
 <!--
 docker build emule-docker -t darioragusa/emule:latest
-docker run -p 127.0.0.1:9010:9010 darioragusa/emule:latest
+docker image prune --filter="dangling=true"
+docker run --rm -p 127.0.0.1:9010:9010 darioragusa/emule:latest
 docker push darioragusa/emule:latest
 -->
