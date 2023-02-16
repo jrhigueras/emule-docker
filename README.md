@@ -1,12 +1,14 @@
 # emule-docker
 Emule over wine, "daemonized" inside a docker
 
-`docker run -p 9010:9010 -p 23732:23732 -p 23733:23733 -v emule_data:/app/config --name emule darioragusa/emule`
+`docker run -p 8080:8080 -p 23732:23732 -p 23733:23733 -v emule_data:/app/config --name emule darioragusa/emule`
 
 ## Environment variables
 
 - **UID:** UNIX user ID used to create files (Default: `root`)
 - **GID:** UNIX group ID used to create files (Default: `root`)
+- **DISPLAY_WIDTH:** Web VNC desktop width (Default: `1024`)
+- **DISPLAY_HEIGHT:** Web VNC desktop height (Default: `768`)
 - **EMULE_NICK:** User nickname (Default: `https://emule-project.net`)
 - **EMULE_MAX_UPLOAD:** Max upload speed (Default: `1024`, 1 MB/s)
 - **EMULE_TCP_PORT:** TCP port (Default: `23732`)
@@ -23,7 +25,7 @@ Emule over wine, "daemonized" inside a docker
 ## Ports
 
 - `4711/tcp`: Web control panel (Optional)
-- `9010/tcp`: Web VNC desktop
+- `8080/tcp`: Web VNC desktop
 - `23732/tcp`: Edonkey network
 - `23733/udp`: Kad network
 
@@ -36,6 +38,6 @@ Emule over wine, "daemonized" inside a docker
 <!--
 docker build emule-docker -t darioragusa/emule:latest
 docker image prune --filter="dangling=true"
-docker run --rm -p 127.0.0.1:9010:9010 darioragusa/emule:latest
+docker run --rm -p 127.0.0.1:8080:8080 darioragusa/emule:latest
 docker push darioragusa/emule:latest
 -->
