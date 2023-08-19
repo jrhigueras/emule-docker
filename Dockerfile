@@ -20,9 +20,9 @@ ENV WINEARCH win64
 ENV DISPLAY :0
 
 RUN apt-get update && \
-    apt-get -y install nano unzip wget tar curl gnupg2 dos2unix python procps && \
+    apt-get -y install nano unzip wget tar curl gnupg2 dos2unix python-is-python3 2to3 procps && \
     apt-get -y install xvfb x11vnc xdotool supervisor net-tools fluxbox && \
-    apt-get -y install --no-install-recommends wine64
+    apt-get -y install --no-install-recommends wine wine64
 
 # Add a web UI for use purposes
 WORKDIR /root
@@ -32,8 +32,8 @@ RUN wget -O - https://github.com/novnc/websockify/archive/refs/tags/v0.11.0.tar.
 WORKDIR /app
 
 # https://github.com/irwir/eMule
-RUN wget https://github.com/irwir/eMule/releases/download/eMule_v0.60d-community/eMule0.60d_x64.zip -O /tmp/emule.zip && \
-    unzip /tmp/emule.zip -d /tmp && mv /tmp/eMule0.60d/* /app
+RUN wget https://github.com/irwir/eMule/releases/download/eMule_v0.70a-community/emule0.70a_x64_beta.zip -O /tmp/emule.zip && \
+    unzip /tmp/emule.zip -d /tmp/eMule0.70a/ && mv /tmp/eMule0.70a/* /app
     
 COPY config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY scripts /app

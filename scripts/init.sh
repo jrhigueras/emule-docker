@@ -34,4 +34,4 @@ echo "Waiting to run emule... 2"
 sleep 5
 echo "Waiting to run emule... 1"
 sleep 5
-/usr/bin/wine64-stable /app/emule.exe
+/usr/bin/wine-stable /app/emule.exe
