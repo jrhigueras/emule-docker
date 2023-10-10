@@ -40,4 +40,9 @@ docker build emule-docker -t darioragusa/emule:latest
 docker image prune --filter="dangling=true"
 docker run --rm -p 127.0.0.1:8080:8080 darioragusa/emule:latest
 docker push darioragusa/emule:latest
+
+docker build emule-docker -t darioragusa/emule:0.70a
+docker image prune --filter="dangling=true"
+docker run --rm -p 127.0.0.1:8080:8080 darioragusa/emule:0.70a
+docker push darioragusa/emule:0.70a
 -->
