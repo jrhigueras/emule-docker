@@ -4,7 +4,7 @@ WORKDIR /root
 COPY launcher /root
 RUN go build -o launcher
 
-FROM debian:stable-slim
+FROM debian:bookworm-slim
 LABEL maintainer="Dario Ragusa"
 
 ENV UID 0
@@ -25,16 +25,11 @@ RUN apt update && \
     apt -y install xvfb x11vnc xdotool supervisor net-tools fluxbox
 
 RUN dpkg --add-architecture i386 && \
-    apt update && \
-    apt -y install wine32
-
-# Dovesse servire è qui
-# RUN dpkg --add-architecture i386 && \
-#     mkdir -pm755 /etc/apt/keyrings && \
-#     wget -O /etc/apt/keyrings/winehq-archive.key https://dl.winehq.org/wine-builds/winehq.key && \
-#     wget -NP /etc/apt/sources.list.d/ https://dl.winehq.org/wine-builds/debian/dists/bookworm/winehq-bookworm.sources
-# RUN apt update && \
-#     apt -y install --no-install-recommends winehq-stable
+    mkdir -pm755 /etc/apt/keyrings && \
+    wget -O /etc/apt/keyrings/winehq-archive.key https://dl.winehq.org/wine-builds/winehq.key && \
+    wget -NP /etc/apt/sources.list.d/ https://dl.winehq.org/wine-builds/debian/dists/bookworm/winehq-bookworm.sources
+RUN apt update && \
+    apt -y install --no-install-recommends winehq-stable
 
 # Add a web UI for use purposes
 RUN wget -O - https://github.com/novnc/noVNC/archive/refs/tags/v1.4.0.tar.gz | tar -xzv -C /root/ && mv /root/noVNC-1.4.0 /root/novnc && ln -s /root/novnc/vnc_lite.html /root/novnc/index.html
