@@ -21,7 +21,7 @@ ENV WINEDLLOVERRIDES=mscoree=d;mshtml=d
 ENV DISPLAY :0
 
 RUN apt update && \
-    apt -y install nano unzip wget tar curl gnupg2 dos2unix python-is-python3 2to3 procps && \
+    apt -y install nano unzip wget tar curl gnupg2 dos2unix python-is-python3 2to3 procps git && \
     apt -y install xvfb x11vnc xdotool supervisor net-tools fluxbox
 
 RUN dpkg --add-architecture i386 && \
@@ -32,8 +32,8 @@ RUN apt update && \
     apt -y install --no-install-recommends winehq-stable
 
 # Add a web UI for use purposes
-RUN wget -O - https://github.com/novnc/noVNC/archive/refs/tags/v1.4.0.tar.gz | tar -xzv -C /root/ && mv /root/noVNC-1.4.0 /root/novnc && ln -s /root/novnc/vnc_lite.html /root/novnc/index.html
-RUN wget -O - https://github.com/novnc/websockify/archive/refs/tags/v0.11.0.tar.gz | tar -xzv -C /root/ && mv /root/websockify-0.11.0 /root/novnc/utils/websockify
+RUN git clone https://github.com/novnc/noVNC/ && ln -s /noVNC/vnc_lite.html /noVNC/index.html
+RUN git clone https://github.com/novnc/websockify/ && mv /websockify /noVNC/utils/websockify
 
 WORKDIR /app
 
