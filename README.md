@@ -31,8 +31,8 @@ Emule over wine, "daemonized" inside a docker
 
 ## Volumes
 
-- `/app/Incoming`: Complete downloads
-- `/app/Temp`: Incomplete downloads
+- `/data/download`: Complete downloads
+- `/data/tmp`: Incomplete downloads
 - `/app/config`: Emule data
 
 <!--
