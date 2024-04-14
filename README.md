@@ -9,6 +9,7 @@ Emule over wine, "daemonized" inside a docker
 - **GID:** UNIX group ID used to create files (Default: `root`)
 - **DISPLAY_WIDTH:** Web VNC desktop width (Default: `1024`)
 - **DISPLAY_HEIGHT:** Web VNC desktop height (Default: `768`)
+- **SLEEP_SECONDS:** Wait before run eMule (Default: `5`)
 - **EMULE_NICK:** User nickname (Default: `https://emule-project.net`)
 - **EMULE_MAX_UPLOAD:** Max upload speed (Default: `1024`, 1 MB/s)
 - **EMULE_TCP_PORT:** TCP port (Default: `23732`)
