@@ -1,13 +1,23 @@
 #!/bin/sh
 
-if [ -f "/data/download" ]; then
+if [ ! -f "/data/download" ]; then
     echo "Creating download directory..."
     mkdir -p /data/download
 fi
 
-if [ -f "/data/tmp" ]; then
+if [ ! -f "/data/tmp" ]; then
     echo "Creating tmp directory..."
     mkdir -p /data/tmp
+fi
+
+if [ ! -f "/app/config" ]; then
+    echo "Creating config directory..."
+    mkdir -p /app/config
+fi
+
+if [ ! -f "/app/config/preferences.ini" ]; then
+    echo "Creating config file..."
+    cp -n /app/preferences.ini /app/config/preferences.ini
 fi
 
 if [ $UID != "0" ]; then

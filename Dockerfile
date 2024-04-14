@@ -45,9 +45,8 @@ COPY config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY scripts /app
 COPY --from=launcher-builder /root/launcher /app
 
-# Default settings
-COPY config/preferences.ini /app/config/preferences.ini
-RUN mkdir -p /data/download /data/tmp
+# Copy default settings
+COPY config/preferences.ini /app/preferences.ini
 
 RUN dos2unix /app/init.sh
 
