@@ -45,6 +45,10 @@ COPY config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY scripts /app
 COPY --from=launcher-builder /root/launcher /app
 
+# Default settings
+COPY config/preferences.ini /app/config/preferences.ini
+RUN mkdir -p /data/download /data/tmp
+
 RUN dos2unix /app/init.sh
 
 EXPOSE 4711/tcp 8080/tcp 23732/tcp 23733/udp

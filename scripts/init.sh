@@ -24,14 +24,19 @@ echo "Applying configuration..."
 echo "Running virtual desktop..."
 /usr/bin/supervisord -n &
 
+SLEEPSECONDS=5
+if [ ${SLEEP_SECONDS} -ge 1 ]; then
+    SLEEPSECONDS=${SLEEP_SECONDS}
+fi
+
 echo "Waiting to run emule... 5"
-sleep 5
+sleep $SLEEPSECONDS
 echo "Waiting to run emule... 4"
-sleep 5
+sleep $SLEEPSECONDS
 echo "Waiting to run emule... 3"
-sleep 5
+sleep $SLEEPSECONDS
 echo "Waiting to run emule... 2"
-sleep 5
+sleep $SLEEPSECONDS
 echo "Waiting to run emule... 1"
-sleep 5
+sleep $SLEEPSECONDS
 /usr/bin/wine /app/emule.exe
