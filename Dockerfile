@@ -7,18 +7,18 @@ RUN go build -o launcher
 FROM debian:bookworm-slim
 LABEL maintainer="Dario Ragusa"
 
-ENV UID 0
-ENV GUI 0
-ENV DEBIAN_FRONTEND noninteractive
-ENV LC_ALL C.UTF-8
-ENV LANG en_US.UTF-8
-ENV LANGUAGE en_US.UTF-8
+ENV UID=0
+ENV GUI=0
+ENV DEBIAN_FRONTEND=noninteractive
+ENV LC_ALL=C.UTF-8
+ENV LANG=en_US.UTF-8
+ENV LANGUAGE=en_US.UTF-8
 ENV DISPLAY_WIDTH=1024
 ENV DISPLAY_HEIGHT=768
-ENV WINEPREFIX /app/.wine
-ENV WINEARCH win32
+ENV WINEPREFIX=/app/.wine
+ENV WINEARCH=win32
 ENV WINEDLLOVERRIDES=mscoree=d;mshtml=d
-ENV DISPLAY :0
+ENV DISPLAY=:0
 
 RUN apt update && \
     apt -y install nano unzip wget tar curl gnupg2 dos2unix python-is-python3 2to3 procps git && \
