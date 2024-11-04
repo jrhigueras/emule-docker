@@ -20,6 +20,8 @@ if [ ! -f "/app/config/preferences.ini" ]; then
     cp -n /app/preferences.ini /app/config/preferences.ini
 fi
 
+cp -n /app/config_bak/* /app/config
+
 if [ $UID != "0" ]; then
     echo "Fixing permissions..."
     useradd --shell /bin/bash -u ${UID} -U -d /app -s /bin/false emule && \

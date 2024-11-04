@@ -45,5 +45,5 @@ docker push darioragusa/emule:latest
 docker build emule-docker -t darioragusa/emule:0.70b
 docker image prune --filter="dangling=true"
 docker run --rm -p 127.0.0.1:8080:8080 darioragusa/emule:0.70b
-docker push darioragusa/emule:0.7b
+docker push darioragusa/emule:0.70b
 -->

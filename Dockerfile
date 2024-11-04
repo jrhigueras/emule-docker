@@ -39,7 +39,7 @@ WORKDIR /app
 
 # https://github.com/irwir/eMule
 RUN wget https://github.com/irwir/eMule/releases/download/eMule_v0.70b-community/eMule0.70b.zip -O /tmp/emule.zip && \
-    unzip /tmp/emule.zip -d /tmp && mv /tmp/eMule0.70b/* /app
+    unzip /tmp/emule.zip -d /tmp && mv /tmp/eMule0.70b/* /app && cp -r /app/config /app/config_bak
 
 COPY config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY scripts /app
