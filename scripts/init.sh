@@ -20,35 +20,25 @@ if [ ! -f "/app/config/preferences.ini" ]; then
     cp -n /app/preferences.ini /app/config/preferences.ini
 fi
 
-cp -n /app/config_bak/* /app/config
+if [ "$(id -u)" = "0" ]; then
+    cp -n /app/config_bak/* /app/config
 
-if [ $UID != "0" ]; then
+    echo "Applying configuration..."
+    /app/launcher
+
+    echo "Running virtual desktop..."
+    /usr/bin/supervisord -n &
+
+fi
+
+if [ $UID != "0" ] && [ "$(id -u)" = "0" ]; then
     echo "Fixing permissions..."
-    useradd --shell /bin/bash -u ${UID} -U -d /app -s /bin/false emule && \
+    useradd -u ${UID} -U -d /app -s /bin/false emule && \
     usermod -G users emule
     chown -R ${UID}:${GID} /data
     chown -R ${UID}:${GID} /app
+    exec su -s /bin/sh -c "$0" emule
+    exit $?
 fi
 
-echo "Applying configuration..."
-/app/launcher
-
-echo "Running virtual desktop..."
-/usr/bin/supervisord -n &
-
-SLEEPSECONDS=5
-if [ ${SLEEP_SECONDS} -ge 1 ]; then
-    SLEEPSECONDS=${SLEEP_SECONDS}
-fi
-
-echo "Waiting to run emule... 5"
-sleep $SLEEPSECONDS
-echo "Waiting to run emule... 4"
-sleep $SLEEPSECONDS
-echo "Waiting to run emule... 3"
-sleep $SLEEPSECONDS
-echo "Waiting to run emule... 2"
-sleep $SLEEPSECONDS
-echo "Waiting to run emule... 1"
-sleep $SLEEPSECONDS
-/usr/bin/wine /app/emule.exe
+wine /app/emule.exe
