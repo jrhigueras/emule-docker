@@ -5,10 +5,10 @@ COPY launcher /root
 RUN go build -o launcher
 
 FROM debian:bookworm-slim
-LABEL maintainer="Dario Ragusa"
+LABEL maintainer="Juan Ramón Higueras Pica"
 
 ENV UID=0
-ENV GUI=0
+ENV GID=0
 ENV DEBIAN_FRONTEND=noninteractive
 ENV LC_ALL=C.UTF-8
 ENV LANG=en_US.UTF-8
@@ -16,7 +16,7 @@ ENV LANGUAGE=en_US.UTF-8
 ENV DISPLAY_WIDTH=1024
 ENV DISPLAY_HEIGHT=768
 ENV WINEPREFIX=/app/.wine
-ENV WINEARCH=win32
+ENV WINEARCH=win64
 ENV WINEDLLOVERRIDES=mscoree=d;mshtml=d
 ENV DISPLAY=:0
 
@@ -32,7 +32,7 @@ RUN apt update && \
     apt -y install --no-install-recommends winehq-stable
 
 # Add a web UI for use purposes
-RUN git clone https://github.com/novnc/noVNC/ && ln -s /noVNC/vnc_lite.html /noVNC/index.html
+RUN git clone https://github.com/novnc/noVNC/ && ln -s /noVNC/vnc.html /noVNC/index.html
 RUN git clone https://github.com/novnc/websockify/ && mv /websockify /noVNC/utils/websockify
 
 WORKDIR /app
@@ -50,6 +50,6 @@ COPY config/preferences.ini /app/preferences.ini
 
 RUN dos2unix /app/init.sh
 
-EXPOSE 4711/tcp 8080/tcp 23732/tcp 23733/udp
+EXPOSE 4711/tcp 8080/tcp 23732/tcp 23732/udp 23735/udp
 
 ENTRYPOINT ["/app/init.sh"]
