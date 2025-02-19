@@ -2,10 +2,11 @@ package main
 
 import (
 	"fmt"
-	"gopkg.in/ini.v1"
 	"os"
 	"strings"
 	"syscall"
+
+	"gopkg.in/ini.v1"
 )
 
 const (
@@ -32,7 +33,8 @@ func main() {
 		{env: "EMULE_NICK", iniSection: "eMule", iniKey: "Nick", defaultVal: "https://emule-project.net"},
 		{env: "EMULE_MAX_UPLOAD", iniSection: "eMule", iniKey: "MaxUpload", defaultVal: "1024"},
 		{env: "EMULE_TCP_PORT", iniSection: "eMule", iniKey: "Port", defaultVal: "23732"},
-		{env: "EMULE_UDP_PORT", iniSection: "eMule", iniKey: "UDPPort", defaultVal: "23733"},
+		{env: "EMULE_UDP_PORT", iniSection: "eMule", iniKey: "UDPPort", defaultVal: "23732"},
+		{env: "EMULE_EXTENDED_UDP_PORT", iniSection: "eMule", iniKey: "ServerUDPPort", defaultVal: "23735"},
 		{env: "EMULE_LANGUAGE", iniSection: "eMule", iniKey: "Language", defaultVal: "1033"},
 		{env: "EMULE_CAP_UPLOAD", iniSection: "eMule", iniKey: "UploadCapacityNew", defaultVal: "2048"},
 		{env: "EMULE_CAP_DOWNLOAD", iniSection: "eMule", iniKey: "DownloadCapacity", defaultVal: "16384"},
@@ -45,13 +47,13 @@ func main() {
 		{env: "", iniSection: "eMule", iniKey: "FilterBadIPs", defaultVal: "1"},
 		{env: "", iniSection: "eMule", iniKey: "Autoconnect", defaultVal: "1"},
 		{env: "", iniSection: "eMule", iniKey: "Verbose", defaultVal: "1"},
-		{env: "", iniSection: "eMule", iniKey: "IncomingDir", defaultVal: "Z:\\data\\download"},
-		{env: "", iniSection: "eMule", iniKey: "TempDir", defaultVal: "Z:\\data\\tmp"},
+		{env: "", iniSection: "eMule", iniKey: "IncomingDir", defaultVal: "Z:\\data\\incoming"},
+		{env: "", iniSection: "eMule", iniKey: "TempDir", defaultVal: "Z:\\data\\temp"},
 		{env: "", iniSection: "eMule", iniKey: "NotifierConfiguration", defaultVal: "Z:\\app\\config\\Notifier.ini"},
 		{env: "", iniSection: "eMule", iniKey: "WebTemplateFile", defaultVal: "Z:\\app\\config\\eMule.tmpl"},
 		{env: "", iniSection: "eMule", iniKey: "ToolbarBitmapFolder", defaultVal: "Z:\\app\\skins"},
 		{env: "", iniSection: "eMule", iniKey: "SkinProfileDir", defaultVal: "Z:\\app\\skins"},
-		{env: "", iniSection: "WebServer", iniKey: "Enabled", defaultVal: "1"},
+		{env: "WEB_ENABLE", iniSection: "WebServer", iniKey: "Enabled", defaultVal: "1"},
 		{env: "", iniSection: "UPnP", iniKey: "EnableUPnP", defaultVal: "0"},
 	}
 
